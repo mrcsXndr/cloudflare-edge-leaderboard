@@ -4,6 +4,9 @@
 ### Install dependencies
 1. Run ```npm install``` in your project folder
 2. Run setup script
+3. Run DB setup 
+```# DB Setup npx wrangler d1 execute edge-leaderboard-db --local --command "CREATE TABLE IF NOT EXISTS leaderboard ( name TEXT PRIMARY KEY, score INTEGER);"```
+3. Run npx wrangler pages dev -- npm run dev
 
 ### Configuration
 Get your account ID and Global API key from: https://dash.cloudflare.com/%7Baccount_id%7D/workers-and-pages
