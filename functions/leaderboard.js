@@ -10,7 +10,8 @@ function createResponse(body = null, options = {}) {
   return response;
 }
 
-export async function onRequestGet({ env }) {
+export async function onRequestGet(context) {
+  const { env } = context;
   try {
     const scores = await getScores(env.DB);
     console.log('Fetched scores:', scores);
@@ -21,7 +22,8 @@ export async function onRequestGet({ env }) {
   }
 }
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost(context) {
+  const { request, env } = context;
   try {
     const { name, score } = await request.json();
     console.log('Received score update:', { name, score });
