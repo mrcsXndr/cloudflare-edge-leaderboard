@@ -10,19 +10,13 @@ export default class Leaderboard {
         this.init();
     }
 
-    formatTimestamp(isoString) {
-        const date = new Date(isoString);
-        return date.toISOString().replace('T', ' ').slice(0, 19);
-    }
-
     init() {
         if (this.demo) this.generateMockItems();
         this.render();
     }
 
     addItem(name, score, timestamp) {
-        const formattedTimestamp = this.formatTimestamp(timestamp);
-        this.Items.push({ name, score, timestamp: formattedTimestamp });
+        this.Items.push({ name, score, timestamp });
         this.render();
     }
 
@@ -30,13 +24,13 @@ export default class Leaderboard {
         const itemsToShow = this.showAll ? this.Items : this.Items.slice(0, this.minItems);
         let itemsHtml = itemsToShow.map(item => {
             let itemEntries = [];
-    
+
             if (this.options.fields) {
                 // Loop through each specified field and prepare its display string
                 this.options.fields.forEach(field => {
                     let value = ''; // Value to be displayed
                     let label = ''; // Label to be displayed
-    
+
                     switch (field.toLowerCase()) {
                         case "name":
                             value = item.name;
@@ -54,7 +48,7 @@ export default class Leaderboard {
                             value = '';
                             label = '';
                     }
-    
+
                     // Only add to itemEntries if value is not empty
                     if (value) itemEntries.push(`${label}: ${value}`);
                 });
@@ -62,21 +56,21 @@ export default class Leaderboard {
                 // Default display format if no fields option is provided
                 itemEntries.push(`Name: ${item.name}`, `Score: ${item.score}`, `Timestamp: ${item.timestamp}`);
             }
-    
+
             // Join all entries with ' - ' and wrap in <li>
             return `<li class="leaderboard-item">${itemEntries.join(' - ')}</li>`;
         }).join('');
-    
+
         const moreButtonHtml = this.Items.length > this.minItems ? `<button class="more-btn">${this.showAll ? 'Less' : 'More'}</button>` : '';
-    
+
         this.container.innerHTML = `
             <ul class="leaderboard-list">${itemsHtml}</ul>
             ${moreButtonHtml}
         `;
-    
+
         this.addMoreButtonListener();
     }
-    
+
 
     generateMockItems() {
         for (let i = 1; i <= Math.min(this.maxItems, 10); i++) {

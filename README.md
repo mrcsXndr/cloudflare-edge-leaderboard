@@ -5,7 +5,7 @@
 1. Run ```npm install``` in your project folder
 2. Run setup script
 3. Run DB setup 
-```# DB Setup npx wrangler d1 execute edge-leaderboard-db --local --command "CREATE TABLE IF NOT EXISTS leaderboard ( name TEXT PRIMARY KEY, score INTEGER);"```
+```# DB Setup npx wrangler d1 execute edge-leaderboard-db --local --command "CREATE TABLE IF NOT EXISTS leaderboard ( name TEXT PRIMARY KEY, score INTEGER, timestamp TEXT);"``` 
 3. Run npx wrangler pages dev -- npm run dev
 
 ### Configuration
