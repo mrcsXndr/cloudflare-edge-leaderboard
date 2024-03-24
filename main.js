@@ -1,4 +1,5 @@
 import Leaderboard from './Leaderboard';
+import { chk } from './functions/leaderboard';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const leaderboardElement = document.getElementById('leaderboard');
@@ -28,11 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('name').value;
         const score = parseInt(document.getElementById('score').value);
 
+        // Here we just sign the data, prevent easy cheating
+        const signature = chk(name, score);
+
         try {
             const response = await fetch('/leaderboard', { 
                 method: 'POST',
                 headers: {'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, score }),
+                body: JSON.stringify({ name, score, signature }),
             });
             
             if (!response.ok) {
