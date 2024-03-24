@@ -20,6 +20,10 @@ export default class Leaderboard {
         this.render();
     }
 
+    clear() {
+        this.container.innerHTML = '';
+    }
+
     render() {
         const itemsToShow = this.showAll ? this.Items : this.Items.slice(0, this.minItems);
         let itemsHtml = itemsToShow.map(item => {

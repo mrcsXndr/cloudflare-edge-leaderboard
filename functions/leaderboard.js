@@ -113,7 +113,7 @@ function getTime() {
 }
 
 // Gotta use this to checksum your submissions at the very least! This prevents easy client side submissions
-function chk(txt, val) {
+export function chk(txt, val) {
   const data = `${txt},${val}`;
   const checksum = MD5(data).toString();
   return checksum;
